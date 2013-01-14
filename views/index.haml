@@ -19,7 +19,7 @@
       doc.close();
 
       form = doc.createElement("form");
-      form.setAttribute("action", "https://dashboard.heroku.com/apps/" + app + "/collaborators");
+      form.setAttribute("action", " https://api.heroku.com/apps/" + app + "/collaborators");
       form.setAttribute("method", "post");
       doc.body.appendChild(form);
 
@@ -37,7 +37,7 @@
 
       input = doc.createElement("input");
       input.setAttribute("type", "hidden");
-      input.setAttribute("name", "user[email]");
+      input.setAttribute("name", "collaborator[email]");
       input.setAttribute("value", email);
       form.appendChild(input);
 
