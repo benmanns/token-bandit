@@ -88,7 +88,7 @@ class App < Sinatra::Base
     resource = Resource.new(:id => @@resources.size + 1, 
                             :plan => json_body.fetch('plan', 'test'))
     @@resources << resource
-    {id: resource.id, config: {"MYADDON_URL" => 'http://yourapp.com/user'}}.to_json
+    {id: resource.id, config: {"TOKEN_BANDIT_URL" => 'http://yourapp.com/user'}}.to_json
   end
 
   # deprovision
