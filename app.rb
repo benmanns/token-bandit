@@ -64,6 +64,8 @@ class App < Sinatra::Base
     response.set_cookie('heroku-nav-data', value: params['nav-data'])
     session[:heroku_sso] = params['nav-data']
     session[:email]      = params[:email]
+    session[:authenticity_token] = params[:authenticity_token]
+    session[:app]        = params[:app]
 
     redirect '/'
   end

