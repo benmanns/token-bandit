@@ -43,7 +43,6 @@ class App < Sinatra::Base
   get('/heroku/resources/:id') { sso }
   post('/sso/login') { sso }
 
-  # provision
   post '/heroku/resources' do
     protected!
     status 201
@@ -51,13 +50,11 @@ class App < Sinatra::Base
     JSON.dump(id: 0)
   end
 
-  # deprovision
   delete '/heroku/resources/:id' do
     protected!
     'ok'
   end
 
-  # plan change
   put '/heroku/resources/:id' do
     protected!
     '{}'
