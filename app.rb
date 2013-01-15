@@ -11,7 +11,7 @@ class App < Sinatra::Base
   helpers do
     def protected!
       unless authorized?
-        response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        response['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
         throw(:halt, [401, "Not authorized\n"])
       end
     end
@@ -24,7 +24,7 @@ class App < Sinatra::Base
   end
 
   # sso landing page
-  get "/" do
+  get '/' do
     halt 403, 'not logged in' unless session[:heroku_sso]
     haml :index
   end
@@ -42,7 +42,7 @@ class App < Sinatra::Base
   end
 
   # sso sign in
-  get "/heroku/resources/:id" do
+  get '/heroku/resources/:id' do
     sso
   end
 
@@ -61,7 +61,7 @@ class App < Sinatra::Base
   # deprovision
   delete '/heroku/resources/:id' do
     protected!
-    "ok"
+    'ok'
   end
 
   # plan change
