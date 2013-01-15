@@ -23,7 +23,6 @@ class App < Sinatra::Base
     end
   end
 
-  # sso landing page
   get '/' do
     halt 403, 'not logged in' unless session[:heroku_sso]
     haml :index
@@ -41,14 +40,8 @@ class App < Sinatra::Base
     redirect '/'
   end
 
-  # sso sign in
-  get '/heroku/resources/:id' do
-    sso
-  end
-
-  post '/sso/login' do
-    sso
-  end
+  get('/heroku/resources/:id') { sso }
+  post('/sso/login') { sso }
 
   # provision
   post '/heroku/resources' do
