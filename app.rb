@@ -30,13 +30,13 @@ class App < Sinatra::Base
   end
 
   def sso
-    pre_token = params[:id] + ':' + ENV['SSO_SALT'] + ':' + params[:timestamp]
-    token = Digest::SHA1.hexdigest(pre_token).to_s
-    halt 403 if token != params[:token]
-    halt 403 if params[:timestamp].to_i < (Time.now - 2*60).to_i
+    halt 403 if params[:timestamp].to_i < (Time.now - 2 * 60).to_i
+
+    token = Digest::SHA1.hexdigest("#{params[:id]}:#{ENV['SSO_SALT']}:#{params[:timestamp]}")
+    halt 403 unless token == params[:token]
 
     session[:authenticity_token] = params[:authenticity_token]
-    session[:app]        = params[:app]
+    session[:app] = params[:app]
 
     redirect '/'
   end
