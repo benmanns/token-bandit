@@ -24,7 +24,6 @@ class App < Sinatra::Base
   # sso landing page
   get "/" do
     halt 403, 'not logged in' unless session[:heroku_sso]
-    #response.set_cookie('heroku-nav-data', value: session[:heroku_sso])
     haml :index
   end
 
