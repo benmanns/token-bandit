@@ -45,18 +45,20 @@ class App < Sinatra::Base
 
   post '/heroku/resources' do
     protected!
-    status 201
 
+    status 201
     JSON.dump(id: 0)
   end
 
   delete '/heroku/resources/:id' do
     protected!
+
     'ok'
   end
 
   put '/heroku/resources/:id' do
     protected!
+
     '{}'
   end
 end
