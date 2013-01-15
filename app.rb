@@ -1,5 +1,3 @@
-require 'json'
-
 require 'bundler'
 Bundler.require
 
@@ -47,7 +45,7 @@ class App < Sinatra::Base
     protected!
 
     status 201
-    JSON.dump(id: 0)
+    '{"id":0}'
   end
 
   delete '/heroku/resources/:id' do
