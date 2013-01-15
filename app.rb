@@ -57,7 +57,7 @@ class App < Sinatra::Base
     protected!
     status 201
 
-    {id: 0, config: {"TOKEN_BANDIT_URL" => 'http://yourapp.com/user'}}.to_json
+    {id: 0}.to_json
   end
 
   # deprovision
