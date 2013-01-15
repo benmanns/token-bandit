@@ -47,7 +47,6 @@ class App < Sinatra::Base
   end
 
   post '/sso/login' do
-    puts params.inspect
     sso
   end
 
