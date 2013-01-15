@@ -19,21 +19,6 @@ class App < Sinatra::Base
       @auth.provided? && @auth.basic? && @auth.credentials && 
       @auth.credentials == [ENV['HEROKU_USERNAME'], ENV['HEROKU_PASSWORD']]
     end
-
-    def show_request
-      body = request.body.read
-      unless body.empty?
-        STDOUT.puts "request body:"
-        STDOUT.puts(@json_body = JSON.parse(body))
-      end
-      unless params.empty?
-        STDOUT.puts "params: #{params.inspect}"
-      end
-    end
-
-    def json_body
-      @json_body || (body = request.body.read && JSON.parse(body))
-    end
   end
   
   # sso landing page
@@ -61,7 +46,6 @@ class App < Sinatra::Base
   
   # sso sign in
   get "/heroku/resources/:id" do
-    show_request
     sso
   end
 
@@ -73,7 +57,6 @@ class App < Sinatra::Base
 
   # provision
   post '/heroku/resources' do
-    show_request
     protected!
     status 201
 
@@ -82,14 +65,12 @@ class App < Sinatra::Base
 
   # deprovision
   delete '/heroku/resources/:id' do
-    show_request
     protected!
     "ok"
   end
 
   # plan change
   put '/heroku/resources/:id' do
-    show_request
     protected!
     {}.to_json
   end
