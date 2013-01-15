@@ -6,8 +6,6 @@ STDOUT.sync = true
 class App < Sinatra::Base
   use Rack::Session::Cookie, secret: ENV['SSO_SALT']
 
-  @@resource_id = 0
-
   helpers do
     def protected!
       unless authorized?
@@ -79,7 +77,7 @@ class App < Sinatra::Base
     protected!
     status 201
 
-    {id: (@@resource_id += 1), config: {"TOKEN_BANDIT_URL" => 'http://yourapp.com/user'}}.to_json
+    {id: 0, config: {"TOKEN_BANDIT_URL" => 'http://yourapp.com/user'}}.to_json
   end
 
   # deprovision
