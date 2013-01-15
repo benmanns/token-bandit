@@ -20,7 +20,7 @@ class App < Sinatra::Base
       @auth.credentials == [ENV['HEROKU_USERNAME'], ENV['HEROKU_PASSWORD']]
     end
   end
-  
+
   # sso landing page
   get "/" do
     halt 403, 'not logged in' unless session[:heroku_sso]
@@ -43,7 +43,7 @@ class App < Sinatra::Base
 
     redirect '/'
   end
-  
+
   # sso sign in
   get "/heroku/resources/:id" do
     sso
@@ -53,7 +53,6 @@ class App < Sinatra::Base
     puts params.inspect
     sso
   end
-
 
   # provision
   post '/heroku/resources' do
