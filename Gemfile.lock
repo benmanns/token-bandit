@@ -4,7 +4,6 @@ GEM
     daemons (1.1.4)
     eventmachine (0.12.10)
     haml (3.1.2)
-    json (1.6.1)
     rack (1.3.4)
     rack-protection (1.1.4)
       rack
@@ -23,6 +22,5 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  json
   sinatra
   thin

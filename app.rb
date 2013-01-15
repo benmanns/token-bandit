@@ -1,3 +1,5 @@
+require 'json'
+
 require 'bundler'
 Bundler.require
 
@@ -53,7 +55,7 @@ class App < Sinatra::Base
     protected!
     status 201
 
-    {id: 0}.to_json
+    JSON.dump(id: 0)
   end
 
   # deprovision
@@ -65,6 +67,6 @@ class App < Sinatra::Base
   # plan change
   put '/heroku/resources/:id' do
     protected!
-    {}.to_json
+    '{}'
   end
 end
