@@ -33,8 +33,6 @@ class App < Sinatra::Base
     halt 403 if token != params[:token]
     halt 403 if params[:timestamp].to_i < (Time.now - 2*60).to_i
 
-    response.set_cookie('heroku-nav-data', value: params['nav-data'])
-    session[:heroku_sso] = params['nav-data']
     session[:authenticity_token] = params[:authenticity_token]
     session[:app]        = params[:app]
 
